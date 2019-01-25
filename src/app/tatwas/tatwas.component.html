@@ -1,0 +1,86 @@
+<div class="container-fluid mainContent">
+    <div class="row">
+      <div class="col-md-12">         
+        <h2>
+          Horario Tátwico
+        </h2>
+        <p>
+          La vibración de los Tatwas comienza con la salida del sol. Cada Tatwa vibra durante 24 minutos en un período de dos horas. El primer Tatwa que vibra es Akash, después le siguen en orden sucesivo: Vayú, Tejas, Prithvi, Apas. A las dos horas vuelve a vibrar Akash y se repite la sucesión de los Tatwas en el mismo orden. Los Tatwas vibran de día y de noche.
+        </p>
+        <p>
+            <span class="badge badge-info" style="font-size: large" >Horarios para hoy {{ currentDate | date : 'EEEE d MMMM, y' }} </span>
+        </p>
+        <p *ngIf="!tatwas"><em>Loading...</em></p>
+        <table class="table table-sm"  *ngIf="tatwas">          
+          <thead>
+            <tr>
+              <th>
+                Tatwa
+              </th>
+              <th>
+                Hora de inicio
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tatwa of tatwas">
+              <td>{{tatwa.tatwaName}}</td>
+              <td>{{ tatwa.startTime | date:'h:mm:ss a zzzz'}}</td>              
+            </tr>
+          </tbody>
+        </table>
+        <div id="Akash" class="jumbotron">
+          <h2>
+            Akash
+          </h2>
+          <p style="font-size: large">
+            Es bueno para la meditación exclusivamente. A esta hora le aconsejamos orar mucho. No tenga citas de negocios, ni de amor a esta hora porque fracasará inevitablemente. Este Tatwa nos hace cometer errores gravísimos. Si Ud. trabaja durante este período debe entonces ser muy cuidadoso. (Los artistas deben de abstenerse del trabajo en Akash) Todo lo que comienza en Akash fracasará. Akash es el Tatwa de la muerte.
+          </p>
+        </div>
+        <div class="jumbotron">
+          <h2>
+            Vayú
+          </h2>
+          <p style="font-size: large">
+            Todo lo que sea velocidad y movimiento corresponde a Vayú, el principio del aire. Los vientos, el aire, la navegación aérea, etc., se hallan relacionados con Vayú. Durante este período la gente goza hablando mal del prójimo, engañando, robando, etc., por lo común los accidentes de aviación ocurren en este período, los suicidas son estimulados por este Tatwa. Le aconsejamos que no se case durante este período porque su matrimonio sería de corta duración. Toda clase de negocios sencillos y rápidos resultan muy buenos en Vayú, pero los negocios complicados y de larga duración resultan un fracaso. Es bueno hacer trabajos intelectuales durante este período. Los grandes Yoguis manejan mentalmente este Tatwa y lo utilizan inteligentemente cuando quieren flotar en el aire.
+          </p>
+        </div>
+        <div class="jumbotron">
+          <h2>
+            Tejas
+          </h2>
+          <p style="font-size: large">
+            Es caliente porque es el principio etérico del fuego. Durante el período en que este Tatwa está activo sentimos más calor. Puede Ud. bañarse con agua fría en Tejas y no se resfriará jamás. No discuta con nadie en Tejas porque las consecuencias pueden ser graves. Ud. debe emplear la hora de Tejas para trabajar intensamente. No se case Ud. en Tejas porque tendrá constantes rencillas con el cónyuge. Las explosiones y accidentes más terribles ocurren en este período del Tatwa Tejas.
+          </p>
+        </div>
+        <div class="jumbotron">
+          <h2>
+            Prithvi
+          </h2>
+          <p style="font-size: large">
+            Este es el Tatwa del éxito en la vida. Si Ud. quiere triunfar en los negocios hágalos en Prithvi. Si Ud. quiere tener buena salud coma y beba en Prithvi. Los matrimonios que se realizan en Prithvi se hacen dichosos para toda la vida. Toda fiesta, toda conferencia, todo negocio, toda cita que se realice en Prithvi será un éxito completo. Prithvi es amor, caridad, benevolencia.
+          </p>
+        </div>
+        <div class="jumbotron">
+          <h2>
+            Apas
+          </h2>
+          <p style="font-size: large">
+            Es el principio del agua y lo contrario a Tejas (Fuego) Este Tatwa es maravilloso para la compra de mercancías. Es también maravilloso para los negocios y Ud. puede conseguir mucho dinero si sabe aprovechar este Tatwa. Compre Ud. lotería en Apas. Los viajes por agua resultan buenos en Apas. Las lluvias que comienzan en Apas suelen ser muy largas y fuertes. El Tatwa Apas obra concentrando y atrayendo.
+          </p>
+        </div>
+        <!-- Footer -->
+        <footer class="page-footer font-small blue">
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">Extraido del Libro
+              <a href="https://www.samaelgnosis.net/libros/htm/introduccion_gnosis/index.htm"> Introducción a la Gnosis</a>              
+              <div style="font-weight: bold">V.M. Samael Aun Weor</div>
+            </div>
+            <!-- Copyright -->
+          
+          </footer>
+          <!-- Footer -->
+      </div>
+    </div>
+  </div>
