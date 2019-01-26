@@ -8,12 +8,14 @@ import { TatwasComponent } from './tatwas/tatwas.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { SunriseSunsetService } from './services/sunrise-sunset.service';
+import { StartComponent } from './start/start.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    TatwasComponent
+    TatwasComponent,
+    StartComponent
   ],
   imports: [
     BrowserModule,

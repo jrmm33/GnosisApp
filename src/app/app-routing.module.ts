@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TatwasComponent } from './tatwas/tatwas.component';
+import { StartComponent } from './start/start.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '', pathMatch: 'full' },
+  { path: '', redirectTo: '/start', pathMatch: 'full' },
+  { path: 'start', component: StartComponent },
   { path: 'tatwas', component: TatwasComponent }
 ];
 
@@ -12,4 +14,4 @@ const routes: Routes = [
   exports: [ RouterModule ]
 })
 
-export class AppRoutingModule {}
+export class AppRoutingModule { }
