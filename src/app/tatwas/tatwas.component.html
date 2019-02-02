@@ -11,24 +11,28 @@
             <span class="badge badge-info" style="font-size: large" >Horarios para hoy {{ currentDate | date : 'EEEE d MMMM, y' }} </span>
         </p>
         <p *ngIf="!tatwas"><em>Loading...</em></p>
-        <table class="table table-sm"  *ngIf="tatwas">          
-          <thead>
-            <tr>
-              <th>
-                Tatwa
-              </th>
-              <th>
-                Hora de inicio
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let tatwa of tatwas">
-              <td>{{tatwa.tatwaName}}</td>
-              <td>{{ tatwa.startTime | date:'h:mm:ss a zzzz'}}</td>              
-            </tr>
-          </tbody>
-        </table>
+        <div id="table-wrapper">
+          <div id="table-scroll">
+            <table class="table fixed_header" *ngIf="tatwas">          
+              <thead>
+                <tr>
+                  <th>
+                    Tatwa
+                  </th>
+                  <th>
+                    Hora de inicio
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let tatwa of tatwas" [ngClass]="{'activeTatwa' : tatwa.tatwaStatus}">
+                  <td>{{tatwa.tatwaName}}</td>
+                  <td>{{ tatwa.startTime | date:'h:mm:ss a zzzz'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
         <div id="Akash" class="jumbotron">
           <h2>
             Akash

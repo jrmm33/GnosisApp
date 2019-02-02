@@ -2,6 +2,7 @@ import { Component, OnInit, DoCheck } from '@angular/core';
 import { SunriseSunsetService, ISunInfo } from '../services/sunrise-sunset.service';
 import { HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-tatwas',
@@ -14,9 +15,11 @@ export class TatwasComponent implements OnInit {
   private lng: number;
   public tatwas: Array<Tatwa> = [];
   _date = new Date(Date.now());
+  _date2 = new Date(Date.now());
+  todayPlus24 = new Date(Date.now());
   currentDate = new Date(Date.now());
 
-  constructor(private service: SunriseSunsetService) { }
+  constructor(private service: SunriseSunsetService) {  }
 
   ngOnInit() {
     this.findMe();
@@ -45,60 +48,70 @@ export class TatwasComponent implements OnInit {
   setTatwas(sunriseTime: string) {
     let tempTatwa = new Tatwa();
     const date1 = new Date('2019-01-25T00:24:00+00:00');
-    const date2 = new Date('2019-01-25T00:59:00+00:00');
-    const date3 = new Date('2019-01-25T00:02:00+00:00');
-
+    let i = 1;
     const UTCDate = new Date(sunriseTime);
     console.log(UTCDate);
     tempTatwa.startTime = new Date(UTCDate);
     tempTatwa.tatwaName = 'Akash';
-    console.log(tempTatwa.tatwaName);
     this.tatwas.push(tempTatwa);
-
-    for (let j = 0; j < 5; j++) {
-      for (let i = 0; i < 4; i++) {
-        tempTatwa = new Tatwa();
-        UTCDate.setMinutes(UTCDate.getMinutes() + date1.getMinutes());
-        console.log(UTCDate);
-        tempTatwa.startTime = new Date(UTCDate);
-        switch (i) {
-          case 0:
-            tempTatwa.tatwaName = 'Vayú';
-            break;
-          case 1:
-            tempTatwa.tatwaName = 'Tejas';
-            break;
-          case 2:
-            tempTatwa.tatwaName = 'Prithvi';
-            break;
-          case 3:
-            tempTatwa.tatwaName = 'Apas';
-            break;
-        }
-        console.log(tempTatwa.tatwaName);
-        this.tatwas.push(tempTatwa);
-      }
+    if (UTCDate.getDate() > this._date.getDate()) {
+      UTCDate.setDate(UTCDate.getDate() - 1);
+    }
+    while (UTCDate.getDate() < (this._date.getDate() + 1)) {
       tempTatwa = new Tatwa();
-      UTCDate.setMinutes(UTCDate.getMinutes() + date2.getMinutes() + date2.getMinutes() + date3.getMinutes());
-      console.log(UTCDate);
+      UTCDate.setMinutes(UTCDate.getMinutes() + date1.getMinutes());
       tempTatwa.startTime = new Date(UTCDate);
-      tempTatwa.tatwaName = 'Akash';
-      console.log(tempTatwa.tatwaName);
+      tempTatwa.tatwaName = this.setTatwaName(i);
+      tempTatwa.tatwaStatus = this.setActiveTatwa(UTCDate);
+      console.log(tempTatwa);
       this.tatwas.push(tempTatwa);
+      if (i !== 4) {
+        i++;
+      } else {
+        i = 0;
+      }
+    }
+  }
 
+  setActiveTatwa(currentTime: Date): boolean {
+    this.todayPlus24 = new Date(currentTime);
+    this.todayPlus24.setMinutes(this.todayPlus24.getMinutes() + 24);
+    if ( this._date2.getTime() > currentTime.getTime() && this._date2.getTime() < this.todayPlus24.getTime()) {
+      console.log(this._date2);
+      console.log(currentTime);
+      console.log(this.todayPlus24);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  setTatwaName(option: number): string {
+    switch (option) {
+      case 0:
+        return 'Akash';
+      case 1:
+        return 'Vayú';
+      case 2:
+        return 'Tejas';
+      case 3:
+        return 'Prithvi';
+      case 4:
+        return 'Apas';
     }
   }
 }
 export class Tatwa {
   private _startTime: Date;
   private _tatwaName: string;
+  private _status: boolean;
 
     get startTime(): Date {
       return this._startTime;
     }
 
-    set startTime(newName: Date) {
-      this._startTime = newName;
+    set startTime(newTime: Date) {
+      this._startTime = newTime;
     }
 
     get tatwaName(): string {
@@ -107,5 +120,13 @@ export class Tatwa {
 
     set tatwaName(newName: string) {
       this._tatwaName = newName;
+    }
+
+    get tatwaStatus(): boolean {
+      return this._status;
+    }
+
+    set tatwaStatus(newStatus: boolean) {
+      this._status = newStatus;
     }
 }
